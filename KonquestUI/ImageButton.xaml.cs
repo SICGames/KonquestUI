@@ -98,7 +98,6 @@ namespace com.Konquest.UI
                 SetValue(IconProperty, value);
             }
         }
-
         public Brush OldBackgroundBrush { get; set; }
         #endregion
         #region Routed Events
@@ -144,13 +143,6 @@ namespace com.Konquest.UI
         {
             InitializeComponent();
             this.DataContext = this;
-            ImageHeight = this.ActualHeight - 2;
-            ImageWidth = this.ActualWidth - 2;
-        }
-
-        private void MAIN_CONTENT_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private BitmapSource ConvertToGreyscale(BitmapSource source)
@@ -180,6 +172,9 @@ namespace com.Konquest.UI
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            ImageHeight = this.ActualHeight - 2;
+            ImageWidth = this.ActualWidth - 2;
+
             this.BorderBrush = this.Background;
             OldBackgroundBrush = this.Background;
 
@@ -217,7 +212,6 @@ namespace com.Konquest.UI
 
         private void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             if ((bool)e.NewValue == false)
             {
                 if (Icon == null)
@@ -232,7 +226,8 @@ namespace com.Konquest.UI
             }
             else
             {
-                if (Icon == null) return;
+                if (Icon == null) 
+                    return;
 
                 var image = new BitmapImage();
                 image.BeginInit();

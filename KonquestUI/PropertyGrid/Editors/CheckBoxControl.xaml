@@ -1,0 +1,20 @@
+﻿<base:EditorControlsBase x:Class="com.KonquestUI.PropertyGrid.Editors.CheckBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:com.KonquestUI.PropertyGrid.Editors"
+             xmlns:base="clr-namespace:com.KonquestUI.Base.Editors"
+             x:Name="uc"
+             mc:Ignorable="d" 
+             MinHeight="12"
+             MaxHeight="24"
+             MinWidth="12">
+    <Grid Margin="3,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <CheckBox Grid.Column="0" IsChecked="{Binding ElementName=uc, Path=isChecked}" 
+                  VerticalAlignment="Center" HorizontalAlignment="Left" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+    </Grid>
+</base:EditorControlsBase>

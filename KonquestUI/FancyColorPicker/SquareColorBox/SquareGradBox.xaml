@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="com.KonquestUI.Controls.SquareGradBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:com.KonquestUI.Controls"
+             xmlns:converters="clr-namespace:com.KonquestUI.Converters"
+             mc:Ignorable="d" 
+             x:Name="ColorPicker_UC"
+             x:ClassModifier="internal"
+             d:DesignHeight="400" d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ProportialConverter x:Key="ProportionalConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid MouseMove="OnMouseMove" MouseDown="OnMouseDown" MouseUp="OnMouseUp">
+        <Image Width="{Binding ElementName=ColorPicker_UC, Path=Width}"
+               Height="{Binding ElementName=ColorPicker_UC, Path=Height}"
+               Source="{Binding ElementName=ColorPicker_UC, Path=GradientBitmap}" Stretch="Fill"/>
+        <Canvas Background="Transparent">
+            <Grid x:Name="head">
+                <Canvas.Left>
+                    <MultiBinding Converter="{StaticResource ProportionalConverter}">
+                        <Binding ElementName="ColorPicker_UC" Path="ActualWidth"/>
+                        <Binding ElementName="ColorPicker_UC" Path="HeadX"/>
+                        <Binding ElementName="ColorPicker_UC" Path="RangeX"/>
+                    </MultiBinding>
+                </Canvas.Left>
+                <Canvas.Bottom>
+                    <MultiBinding Converter="{StaticResource ProportionalConverter}">
+                        <Binding ElementName="ColorPicker_UC" Path="ActualHeight"/>
+                        <Binding ElementName="ColorPicker_UC" Path="HeadY"/>
+                        <Binding ElementName="ColorPicker_UC" Path="RangeY"/>
+                    </MultiBinding>
+                </Canvas.Bottom>
+                <Ellipse Fill="Transparent" Stroke="White" StrokeThickness="2" Width="12" Height="12" />
+                <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="2" Width="14" Height="14" />
+                <Grid.RenderTransform>
+                    <TranslateTransform X="-7" Y="7" />
+                </Grid.RenderTransform>
+            </Grid>
+        </Canvas>
+    </Grid>
+</UserControl>

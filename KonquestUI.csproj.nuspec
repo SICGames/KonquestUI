@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>KonquestUI.csproj</id>
+    <version>1.0.0</version>
+    <authors>SICGames</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">GPL-3.0-or-later</license>
+    <!-- <icon>icon.png</icon> -->
+    <description>A set of User Controls for WPF .NET Framework</description>
+    <releaseNotes>There will be changes in the future. So far, none has been done.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>KonquestUI HellstormGames UIWPF</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="SampleDependency" version="1.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

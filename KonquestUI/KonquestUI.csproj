@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1B234EDC-F6E8-447F-92D9-12E4DEBE448B}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>com.KonquestUI</RootNamespace>
+    <AssemblyName>KonquestUI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FancyButton\FancyButton.cs" />
+    <Compile Include="FancyColorPicker\Controls\ColorDisplay.xaml.cs">
+      <DependentUpon>ColorDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FancyColorPicker\Controls\SimpleColorPicker.xaml.cs">
+      <DependentUpon>SimpleColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FancyColorPicker\Converters\MinConverter.cs" />
+    <Compile Include="FancyColorPicker\Converters\ProportionalConverter.cs" />
+    <Compile Include="FancyColorPicker\Helpers\MathHelpers.cs" />
+    <Compile Include="FancyColorPicker\HueColorWheel\HueColorWheel.xaml.cs">
+      <DependentUpon>HueColorWheel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FancyColorPicker\Models\ColorRoutedEventArgs.cs" />
+    <Compile Include="FancyColorPicker\Models\ColorSpaceHelper.cs" />
+    <Compile Include="FancyColorPicker\Models\ColorState.cs" />
+    <Compile Include="FancyColorPicker\Models\IColorStateStorage.cs" />
+    <Compile Include="FancyColorPicker\Models\NotifyableColor.cs" />
+    <Compile Include="FancyColorPicker\Models\NotifyableObject.cs" />
+    <Compile Include="FancyColorPicker\Models\PickerType.cs" />
+    <Compile Include="FancyColorPicker\PickerControlBase.cs" />
+    <Compile Include="FancyColorPicker\SquareColorBox\SquareGradBox.xaml.cs">
+      <DependentUpon>SquareGradBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FancyFilePicker\FancyFilePicker.cs" />
+    <Compile Include="FancyImageButton\FancyImageButton.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="FancyNavigationButton\FancyNavigationButton.cs" />
+    <Compile Include="FancyNumericValue\FancyNumericValue.cs" />
+    <Compile Include="FancyTagBox\FancyTagBox.cs" />
+    <Compile Include="FancyTagBox\FancyTagItem.cs" />
+    <Compile Include="PropertyGrid\Base\EditorControlsBase.cs" />
+    <Compile Include="PropertyGrid\Base\PropertyGridViewBase.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="PropertyGrid\CustomAttributes\ExpandableAttribute.cs" />
+    <Compile Include="FancyPropertyGrid.xaml.cs">
+      <DependentUpon>FancyPropertyGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Dialogs\ColorPickerDialog.xaml.cs">
+      <DependentUpon>ColorPickerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\CheckBoxControl.xaml.cs">
+      <DependentUpon>CheckBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\ColorPickerControl.xaml.cs">
+      <DependentUpon>ColorPickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\ComboBoxControl.xaml.cs">
+      <DependentUpon>ComboBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\CustomComboBoxControl.xaml.cs">
+      <DependentUpon>CustomComboBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\FilePickerControl.xaml.cs">
+      <DependentUpon>FilePickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\LabelControl.xaml.cs">
+      <DependentUpon>LabelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Editors\NumericValueControl.xaml.cs">
+      <DependentUpon>NumericValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\Events\HoverEventHandler.cs" />
+    <Compile Include="PropertyGrid\Events\PropertyGridItemChangedEventArgs.cs" />
+    <Compile Include="PropertyGrid\Events\PropertyGridItemChangedEventHandler.cs" />
+    <Compile Include="PropertyGrid\Events\ValueEventChangedArgs.cs" />
+    <Compile Include="PropertyGrid\FancyPropertyGridView.xaml.cs">
+      <DependentUpon>FancyPropertyGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\PropertyGridView\Extended\ColumnDefinationExtended.cs" />
+    <Compile Include="PropertyGrid\PropertyGridView\Extended\RowDefinationExtended.cs" />
+    <Compile Include="PropertyGrid\PropertyGridView\PropertyGridItem.cs" />
+    <Compile Include="PropertyGrid\PropertyGridView\PropertyGridItemCollection.cs" />
+    <Page Include="FancyColorPicker\Controls\ColorDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FancyColorPicker\Controls\SimpleColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FancyColorPicker\HueColorWheel\HueColorWheel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FancyColorPicker\SquareColorBox\SquareGradBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FancyPropertyGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Dialogs\ColorPickerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\CheckBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\ColorPickerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\ComboBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\CustomComboBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\FilePickerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\LabelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\Editors\NumericValueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PropertyGrid\FancyPropertyGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FancyNavigationButton\Converters\" />
+    <Folder Include="Fancy\" />
+    <Folder Include="PropertyGrid\Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\folderIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ColorSelectionRing01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ColorWheelGradient.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ColorWheelGradientIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DownArrow-Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RightArrowIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SelectionRectangle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\UpArrow-Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\close-button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

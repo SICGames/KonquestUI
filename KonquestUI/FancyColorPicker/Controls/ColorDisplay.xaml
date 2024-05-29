@@ -1,0 +1,43 @@
+﻿<base:PickerControlBase x:Class="com.KonquestUI.Controls.ColorDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:com.KonquestUI.Controls"
+             xmlns:base="clr-namespace:com.KonquestUI.Base"
+             xmlns:converters="clr-namespace:com.KonquestUI.Converters"
+             mc:Ignorable="d"
+             x:Name="ColorPicker_UC"
+             MaxWidth="250"
+             MaxHeight="250"
+             MinWidth="25"
+             MinHeight="25"
+             d:DesignHeight="100" d:DesignWidth="100">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:MinConverter x:Key="MinConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Width>
+            <MultiBinding Converter="{StaticResource MinConverter}">
+                <Binding ElementName="ColorPicker_UC" Path="ActualWidth"/>
+                <Binding ElementName="ColorPicker_UC" Path="ActualHeight"/>
+            </MultiBinding>
+        </Grid.Width>
+        <Grid.Height>
+            <MultiBinding Converter="{StaticResource MinConverter}">
+                <Binding ElementName="ColorPicker_UC" Path="ActualWidth"/>
+                <Binding ElementName="ColorPicker_UC" Path="ActualHeight"/>
+            </MultiBinding>
+        </Grid.Height>
+        <Grid>
+            <Rectangle Stroke="Black" StrokeThickness="1">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{Binding ElementName=ColorPicker_UC, Path=SelectedColor}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+    </Grid>
+</base:PickerControlBase>

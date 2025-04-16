@@ -20,15 +20,21 @@ namespace com.KonquestUI.Controls
     {
         WrapPanel TagsViewParent { get; set; }
         TextBox TextBox { get; set; }
+        public static readonly DependencyProperty TagsProperty; 
 
         static FancyTagBox()
         {
+            TagsProperty = DependencyProperty.Register("Tags", typeof(ObservableCollection<String>), typeof(FancyTagBox),
+                           new PropertyMetadata(new ObservableCollection<String>(), TagsChanged));
+
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FancyTagBox), new FrameworkPropertyMetadata(typeof(FancyTagBox)));
         }
+
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
         }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -44,6 +50,7 @@ namespace com.KonquestUI.Controls
             ti.Label = tag;
             TagsViewParent.Children.Add(ti);
         }
+
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             var t = (TextBox)sender;
@@ -59,15 +66,11 @@ namespace com.KonquestUI.Controls
             }
         }
 
-        public static readonly DependencyProperty TagsProperty = DependencyProperty.Register("Tags", typeof(ObservableCollection<String>), typeof(FancyTagBox),
-            new PropertyMetadata(new ObservableCollection<String>(), TagsChanged));
-
         public ObservableCollection<String> Tags
         {
             get => (ObservableCollection<String>)GetValue(TagsProperty);
             set => SetValue(TagsProperty, value);
         }
-
         private static void TagsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var ftb = (FancyTagBox)d;
@@ -80,6 +83,7 @@ namespace com.KonquestUI.Controls
         {
             UpdateTagBoxView();
         }
+
         public void RemoveSelectedTagItem(String item)
         {
             foreach (var tag in Tags)
@@ -91,7 +95,6 @@ namespace com.KonquestUI.Controls
                 }
             }
             UpdateTagBoxView();
-
         }
         private void UpdateTagBoxView()
         {

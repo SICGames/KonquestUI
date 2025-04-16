@@ -5,8 +5,6 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonquestUI", "KonquestUI\KonquestUI.csproj", "{1B234EDC-F6E8-447F-92D9-12E4DEBE448B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonquestUI_Sample_01", "Tests\KonquestUI_Sample_01\KonquestUI_Sample_01.csproj", "{658BD54D-946B-496B-92CB-A52E9785E671}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +21,6 @@ Global
 		{1B234EDC-F6E8-447F-92D9-12E4DEBE448B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B234EDC-F6E8-447F-92D9-12E4DEBE448B}.Release|x64.ActiveCfg = Release|x64
 		{1B234EDC-F6E8-447F-92D9-12E4DEBE448B}.Release|x64.Build.0 = Release|x64
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Debug|x64.ActiveCfg = Debug|x64
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Debug|x64.Build.0 = Debug|x64
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Release|Any CPU.Build.0 = Release|Any CPU
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Release|x64.ActiveCfg = Release|x64
-		{658BD54D-946B-496B-92CB-A52E9785E671}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:com.KonquestUI.Controls"
     xmlns:converters="clr-namespace:com.KonquestUI.Converters">
+    <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibility"/>
+    <converters:BooleanToVisibilityConverter x:Key="BooleanVisibility"/>
     <Style TargetType="{x:Type local:FancyButton}">
         <Style.Resources>
             <SolidColorBrush x:Key="BackgroundColor" Color="#111"/>
@@ -25,67 +27,44 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Corners}" 
                             SnapsToDevicePixels="True">
-                        <Grid Margin="{TemplateBinding Padding}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="GridColumn01" Width="*"/>
-                                <ColumnDefinition x:Name="SEPERATOR" Width="2"/>
-                                <ColumnDefinition x:Name="GridColumn02" Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Rectangle x:Name="RECT" Fill="{TemplateBinding HilightBrush}" Opacity="0" Grid.ColumnSpan="3" 
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Rectangle x:Name="RECT" Fill="{TemplateBinding HoverBrush}" Visibility="Hidden" Grid.ColumnSpan="3" 
                                        RadiusX="{Binding RelativeSource={RelativeSource AncestorType=local:FancyButton}, Path=Corners.TopLeft}"
                                        RadiusY="{Binding RelativeSource={RelativeSource AncestorType=local:FancyButton}, Path=Corners.TopRight}"/>
-                            <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="32"/>
-                                </Grid.RowDefinitions>
+                            <Grid x:Name="MAIN_CONTENT" Margin="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition x:Name="GridColumn01" Width="auto"/>
+                                    <ColumnDefinition x:Name="SEPERATOR" Width="2"/>
+                                    <ColumnDefinition x:Name="GridColumn02" Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="IMAGE"
-                                            Grid.Column="0" Grid.Row="0" Height="16" Source="{TemplateBinding ImageSource}"
-                                            Visibility="Visible"
-                                            Stretch="Uniform" Margin="2" VerticalAlignment="Center"/>
-                            </Grid>
-                            <Rectangle x:Name="SEPERATOR_RECTANGLE" Fill="#bbb"
+                                <Viewbox x:Name="IMAGE_CONTENT" Grid.Row="0" 
+                                         Grid.Column="0"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                         Margin="{TemplateBinding Padding}"
+                                         Visibility="{Binding RelativeSource={RelativeSource AncestorType=local:FancyButton}, Path=Source, Converter={StaticResource NullOrEmptyVisibility}}">
+                                        <Image x:Name="IMAGE" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                Stretch="UniformToFill"
+                                                Source="{Binding RelativeSource={RelativeSource AncestorType=local:FancyButton}, Path=Source}"/>
+                                 </Viewbox>
+                                <Rectangle x:Name="SEPERATOR_RECTANGLE" Fill="#bbb" Grid.Column="1"
                                             Opacity="0.05"
                                             Height="16"
-                                            Visibility="Collapsed" 
+                                            Visibility="{Binding RelativeSource={RelativeSource AncestorType=local:FancyButton}, Path=ShowSeperator, Converter={StaticResource BooleanVisibility}}" 
                                             Stroke="Transparent" 
-                                            StrokeThickness="0"
-                                            Grid.Column="1"/>
-                            <TextBlock x:Name="TEXT" Grid.Column="2" Text="{TemplateBinding Text}" 
-                                            Foreground="{TemplateBinding Foreground}" 
-                                            FontSize="{TemplateBinding FontSize}" 
-                                            Visibility="Visible"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"
-                                            FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontFamily="{TemplateBinding FontFamily}"/>
+                                            StrokeThickness="0"/>
+                                <TextBlock x:Name="TEXT" Grid.Column="2" Text="{TemplateBinding Text}" 
+                                           Foreground="{TemplateBinding Foreground}" 
+                                           FontSize="{TemplateBinding FontSize}" 
+                                           Visibility="{Binding RelativeSource={RelativeSource AncestorType=local:FancyButton}, Path=Text, Converter={StaticResource NullOrEmptyVisibility}}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontFamily="{TemplateBinding FontFamily}"/>
+                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" TargetName="RECT" Value="1"/>
-                        </Trigger>
-                        <Trigger Property="RenderMode" Value="IMAGE">
-                            <Setter Property="Visibility" TargetName="IMAGE" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="TEXT" Value="Collapsed"/>
-                            <Setter Property="Width" TargetName="GridColumn01" Value="32"/>
-                            <Setter Property="Width" TargetName="GridColumn02" Value="0"/>
-                        </Trigger>
-                        <Trigger Property="RenderMode" Value="TEXT">
-                            <Setter Property="Visibility" TargetName="IMAGE" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="TEXT" Value="Visible"/>
-                            <Setter Property="Width" TargetName="GridColumn01" Value="0"/>
-                            <Setter Property="Width" TargetName="GridColumn02" Value="*"/>
-                        </Trigger>
-                        <Trigger Property="RenderMode" Value="IMAGE_TEXT">
-                            <Setter Property="Visibility" TargetName="IMAGE" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="TEXT" Value="Visible"/>
-                            <Setter Property="Width" TargetName="GridColumn01" Value="32"/>
-                            <Setter Property="Width" TargetName="GridColumn02" Value="*"/>
-                        </Trigger>
-                        <Trigger Property="ShowSeperator" Value="True">
-                            <Setter Property="Visibility" TargetName="SEPERATOR_RECTANGLE" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="RECT" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" TargetName="TEXT" Value="{StaticResource Disabled.ForegroundColor}"/>

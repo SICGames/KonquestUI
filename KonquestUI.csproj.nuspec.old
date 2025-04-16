@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>KonquestUI.csproj</id>
+    <id>KonquestUI</id>
     <version>1.0.0</version>
     <authors>SICGames</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
+    <license type="expression">GPL-3.0-or-later</license>
     <!-- <icon>icon.png</icon> -->
-    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>
-    <description>Package description</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <description>A set of User Controls for WPF .NET Framework</description>
+    <releaseNotes>There will be changes in the future. So far, none has been done.</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Tag1 Tag2</tags>
+    <tags>KonquestUI HellstormGames UIWPF</tags>
     <dependencies>
       <group targetFramework=".NETStandard2.1">
         <dependency id="SampleDependency" version="1.0.0" />

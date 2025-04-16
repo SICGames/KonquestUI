@@ -68,6 +68,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\NullOrEmptyVisibilityConverter.cs" />
     <Compile Include="FancyButton\FancyButton.cs" />
     <Compile Include="FancyColorPicker\Controls\ColorDisplay.xaml.cs">
       <DependentUpon>ColorDisplay.xaml</DependentUpon>

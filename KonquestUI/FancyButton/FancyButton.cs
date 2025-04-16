@@ -20,63 +20,17 @@ namespace com.KonquestUI.Controls
     {
         private BitmapSource PreviousBitmapSource { get; set; }
 
-        #region Static FancyButton()
-        static FancyButton()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FancyButton), new FrameworkPropertyMetadata(typeof(FancyButton)));
-            IsEnabledProperty.AddOwner(typeof(FancyButton), new FrameworkPropertyMetadata(IsEnabledPropertyChanged));
-        }
-
-        private static void IsEnabledPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var fb = (FancyButton)d;
-            if (fb != null)
-            {
-                fb.OnEnabledPropertyChanged(fb, e);
-            }
-        }
-        public void OnEnabledPropertyChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            var fb = (FancyButton)sender;
-            var v = (bool)e.NewValue;
-            var image = fb.ImageSource;
-            if (image != null)
-            {
-                if (v)
-                {
-                    fb.ImageSource = image;
-                }
-                else
-                {
-                    fb.ImageSource = ConvertToGreyscale(image);
-                }
-            }
-        }
-        #endregion
-        #region RenderModeEnum
-        public enum RenderModeEnum
-        {
-            IMAGE_TEXT,
-            IMAGE,
-            TEXT
-        }
-        #endregion
-
         #region Dependancy Properties
+        public static readonly DependencyProperty HoverBrushProperty;
 
-        public static readonly DependencyProperty HilightBrushProperty = DependencyProperty.Register("HilightBrush", typeof(Brush), typeof(FancyButton),
-            new FrameworkPropertyMetadata(new SolidColorBrush(Colors.SkyBlue)));
-        public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(FancyButton), null);
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(String), typeof(FancyButton),
-            new PropertyMetadata(""));
-        public static readonly DependencyProperty CornersProperty = DependencyProperty.Register("Corners", typeof(CornerRadius), typeof(FancyButton),
-            new FrameworkPropertyMetadata(new CornerRadius(0, 0, 0, 0)));
-        public static readonly DependencyProperty RenderModeProperty = DependencyProperty.Register("RenderMode", typeof(RenderModeEnum), typeof(FancyButton),
-            new PropertyMetadata(RenderModeEnum.IMAGE_TEXT, OnRenderModeChangedCallBack));
+        public static readonly DependencyProperty SourceProperty; 
+        public static readonly DependencyProperty TextProperty;
 
-        public static readonly DependencyProperty ShowSeperatorProperty = DependencyProperty.Register("ShowSeperator",
-            typeof(bool), typeof(FancyButton), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty CornersProperty;
+        public static readonly DependencyProperty ShowSeperatorProperty;
+        #endregion
 
+        #region Declarations
         public bool ShowSeperator
         {
             get
@@ -88,17 +42,6 @@ namespace com.KonquestUI.Controls
                 SetValue(ShowSeperatorProperty, value);
             }
         }
-        public RenderModeEnum RenderMode
-        {
-            get
-            {
-                return (RenderModeEnum)GetValue(RenderModeProperty);
-            }
-            set
-            {
-                SetValue(RenderModeProperty, value);
-            }
-        }
         public CornerRadius Corners
         {
             get
@@ -107,30 +50,30 @@ namespace com.KonquestUI.Controls
             }
             set { SetValue(CornersProperty, value); }
         }
-        public Brush HilightBrush
+        public Brush HoverBrush
         {
             get
             {
-                return GetValue(HilightBrushProperty) as Brush;
+                return GetValue(HoverBrushProperty) as Brush;
             }
             set
             {
-                SetValue(HilightBrushProperty, value);
+                SetValue(HoverBrushProperty, value);
             }
         }
-
-        public BitmapSource ImageSource
+        public BitmapSource Source
         {
             get
             {
-                return (BitmapSource)GetValue(ImageSourceProperty);
+                return (BitmapSource)GetValue(SourceProperty);
             }
             set
             {
-                SetValue(ImageSourceProperty, value);
+                SetValue(SourceProperty, value);
                 PreviousBitmapSource = value;
             }
         }
+
         public string Text
         {
             get
@@ -142,9 +85,7 @@ namespace com.KonquestUI.Controls
                 SetValue(TextProperty, value);
             }
         }
-
         #endregion
-
 
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -155,23 +96,23 @@ namespace com.KonquestUI.Controls
         }
         #endregion
 
-
-        #region PropertyChangedEvents 
-        private static void OnRenderModeChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        #region Static FancyButton()
+        static FancyButton()
         {
-            FancyButton fb = sender as FancyButton;
-            if (fb != null)
-            {
-                fb.OnRenderModeChanged(e);
-            }
-        }
+           HoverBrushProperty = DependencyProperty.Register("HoverBrush", typeof(Brush), typeof(FancyButton),
+                                                             new FrameworkPropertyMetadata(new SolidColorBrush(Colors.SkyBlue)));
 
-        protected virtual void OnRenderModeChanged(DependencyPropertyChangedEventArgs e)
-        {
-            // Grab related data.
-            // Raises INotifyPropertyChanged.PropertyChanged
+            SourceProperty = DependencyProperty.Register("Source", typeof(ImageSource), typeof(FancyButton), null);
+            TextProperty = DependencyProperty.Register("Text", typeof(String), typeof(FancyButton), new PropertyMetadata(""));
 
-            OnPropertyChanged(nameof(RenderModeProperty));
+            CornersProperty = DependencyProperty.Register("Corners", typeof(CornerRadius), typeof(FancyButton),
+                                                 new FrameworkPropertyMetadata(new CornerRadius(0, 0, 0, 0)));
+
+            ShowSeperatorProperty = DependencyProperty.Register("ShowSeperator",
+                                                       typeof(bool), typeof(FancyButton), new FrameworkPropertyMetadata(false));
+
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FancyButton), new FrameworkPropertyMetadata(typeof(FancyButton)));
+            IsEnabledProperty.AddOwner(typeof(FancyButton), new FrameworkPropertyMetadata(IsEnabledPropertyChanged));
         }
         #endregion
 
@@ -198,6 +139,32 @@ namespace com.KonquestUI.Controls
                 source.PixelWidth, source.PixelHeight,
                 source.DpiX, source.DpiY,
                 source.Format, null, pixels, stride);
+        }
+
+        private static void IsEnabledPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var fb = (FancyButton)d;
+            if (fb != null)
+            {
+                fb.OnEnabledPropertyChanged(fb, e);
+            }
+        }
+        public void OnEnabledPropertyChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var fb = (FancyButton)sender;
+            var v = (bool)e.NewValue;
+            var image = fb.Source;
+            if (image != null)
+            {
+                if (v)
+                {
+                    fb.Source = image;
+                }
+                else
+                {
+                    fb.Source = ConvertToGreyscale(image);
+                }
+            }
         }
     }
 }

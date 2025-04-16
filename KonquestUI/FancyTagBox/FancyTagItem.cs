@@ -19,22 +19,23 @@ namespace com.KonquestUI.Controls
     public class FancyTagItem : Button
     {
         TextBlock textblock { get; set; }
+        public static readonly DependencyProperty LabelProperty = null;
+        public static readonly DependencyProperty CornersPropery = null;
 
-        static FancyTagItem()
+        public string Label
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FancyTagItem), new FrameworkPropertyMetadata(typeof(FancyTagItem)));
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
         }
 
-        public override void OnApplyTemplate()
+        public CornerRadius Corners
         {
-            base.OnApplyTemplate();
-            textblock = base.Template.FindName("TEXT_CONTENT", this) as TextBlock;
-            Border border = base.Template.FindName("MAIN_BORDER", this) as Border;
-            border.PreviewMouseDown += Border_PreviewMouseDown;
+            get => (CornerRadius)GetValue(CornersPropery);
+            set => SetValue(CornersPropery, value);
         }
 
         private static T FindParent<T>(DependencyObject child)
-      where T : DependencyObject
+  where T : DependencyObject
         {
             if (child == null) return null;
 
@@ -57,29 +58,31 @@ namespace com.KonquestUI.Controls
             return foundParent;
         }
 
+
+        static FancyTagItem()
+        {
+            LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(FancyTagItem), new PropertyMetadata("", LabelTextChanged));
+            CornersPropery = DependencyProperty.Register("Corners", typeof(CornerRadius), typeof(FancyTagItem), new PropertyMetadata(new CornerRadius(0, 0, 0, 0))); 
+
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FancyTagItem), new FrameworkPropertyMetadata(typeof(FancyTagItem)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            textblock = base.Template.FindName("TEXT_CONTENT", this) as TextBlock;
+            Border border = base.Template.FindName("MAIN_BORDER", this) as Border;
+            border.PreviewMouseDown += Border_PreviewMouseDown;
+        }
+
+    
         private void Border_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-
             //-- need to communicate with TagBox and have it remove this
             var ftb = FindParent<FancyTagBox>(this);
             ftb.RemoveSelectedTagItem(this.Label);
         }
 
-        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(FancyTagItem), new PropertyMetadata("", LabelTextChanged));
-        public static readonly DependencyProperty CornersPropery = DependencyProperty.Register("Corners", typeof(CornerRadius), typeof(FancyTagItem),
-            new PropertyMetadata(new CornerRadius(0, 0, 0, 0)));
-
-        public string Label
-        {
-            get => (string)GetValue(LabelProperty);
-            set => SetValue(LabelProperty, value);
-        }
-
-        public CornerRadius Corners
-        {
-            get => (CornerRadius)GetValue(CornersPropery);
-            set => SetValue(CornersPropery, value);
-        }
 
         private static void LabelTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
